@@ -4,7 +4,8 @@
 
 	<section>
 		<ul>
-			<li v-for="(todoItem,index) in todoItems" :key="todoItem" class="shadow">
+			<!-- <li v-for="(todoItem,index) in todoItems" :key="todoItem" class="shadow"> -->
+			<li v-for="(todoItem,index) in propsdata" class="shadow"> 
 				<i class="checkBtn fas fa-check" aria-hidden="true"></i>
 					{{ todoItem }} 
 				<span class="removeBtn" type="button" @click="removeTodo(todoItem, index)"> <!--@click은 v-on:click 과 동일함-->
@@ -19,11 +20,21 @@
 
 <script type="text/javascript">
 export default{
+	props : ['propsdata'],
+	
+	/*
+	* props 사용 시 주석처리함 -삭제하기 
+	* 
 	data(){
 		return {
 			todoItems: []
 		}
-	},
+	},*/
+
+
+	/*
+	* App.vue 로 이동 
+	*
 	created(){ //beforeMount , mounted 등 라이프 사이클에 진행해도 결과 동일하나 추후 코드 구조 개선하고 나면 화면 렌더링에 문제가 생김 
 		var len = localStorage.length ;
 		if( len > 0){
@@ -33,13 +44,19 @@ export default{
 
 			}
 		}
-	},
+	},*/
 	methods:{
 		removeTodo(todoItem, index){
 			//console.log(todoItem, index)
+			/*
+			*	변경되는 코드 
+			* 
 			localStorage.removeItem(todoItem);
 			this.todoItems.splice(index,1); // splice = 인자로 받은 인덱스를 이용해 배열의 해당 인덱스에서 1만큼 삭제함 
 			//삭제하자마자 뷰에서 자동으로 화면을 갱신함 왜냐. ? 데이터 속성이 변하면 화면에 즉시 반영하는 뷰의 반응성 때문 ~!
+			*/
+
+			this.$emit('removeTodo' ,todoItem, index)
 		}
 	}
 

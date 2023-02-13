@@ -7,11 +7,16 @@
 
 <script type="text/javascript">
 export default{
-	
+
 	methods : {
+		
 		clearTodo(){
-			localStorage.clear();
+			//localStorage.clear();
+			this.$emit('removeAll')
 		}
+		
+
+
 	}
 
 	
